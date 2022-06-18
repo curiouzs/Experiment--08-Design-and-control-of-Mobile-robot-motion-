@@ -49,39 +49,69 @@ PWM Working Principle - Pulse Width Modulation How It Works
 
 ### PROGRAM 
  
+ ```python 
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ #include <AFMotor.h>
 
+AF_DCMotor motor(4);// number of motor connected with shield
+
+void setup() {
+  Serial.begin(9600);           // set up Serial library at 9600 bps
+  Serial.println("Motor test!");
+
+  // turn on motor
+  motor.setSpeed(200);
  
+  motor.run(RELEASE);
+}
+
+void loop() {
+  uint8_t i;
+  
+  Serial.print("tick");
+  
+  motor.run(FORWARD);
+  for (i=0; i<255; i++) {
+    motor.setSpeed(i);  
+    delay(10);
+ }
  
+  for (i=255; i!=0; i--) {
+    motor.setSpeed(i);  
+    delay(10);
+ }
+  
+  Serial.print("tock");
+
+  motor.run(BACKWARD);
+  for (i=0; i<255; i++) {
+    motor.setSpeed(i);  
+    delay(10);
+ }
+ 
+  for (i=255; i!=0; i--) {
+    motor.setSpeed(i);  
+    delay(10);
+ }
+  
+
+  Serial.print("tech");
+  motor.run(RELEASE);
+  delay(1000);
+}
+
+
+ ```
+ ### OUTPUT:
 
 
 
+![WhatsApp Image 2022-06-18 at 8 43 17 AM (2)](https://user-images.githubusercontent.com/75234646/174420831-ec81aebc-696b-4500-b97a-d42bf491128f.jpeg)
+
+![WhatsApp Image 2022-06-18 at 8 43 17 AM (1)](https://user-images.githubusercontent.com/75234646/174420833-9fab731c-d5bf-4433-8c1c-34e0ecc2af9b.jpeg)
 
 
-
-
-
-
-
-
+![WhatsApp Image 2022-06-18 at 8 43 17 AM](https://user-images.githubusercontent.com/75234646/174420834-d9489720-dcb0-45bc-be99-2b695993a9a6.jpeg)
 
 
 
